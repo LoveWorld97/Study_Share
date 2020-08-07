@@ -42,10 +42,10 @@ FILE __stdout;
 int fputc(int ch, FILE *stream)
 {
 	/*堵塞判断串口是否发送完成*/
-	while((USART_DEBUG->ISR & 0x40) == 0)
+	while((USART_DEBUG->SR & 0x40) == 0)
 	;
 	/*串口发送完成，将该字节发送*/
-	USART_DEBUG->TDR = (uint8_t) ch;
+	USART_DEBUG->DR = (uint8_t) ch;
 	return ch;
 }
  
